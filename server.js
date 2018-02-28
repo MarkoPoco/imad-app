@@ -7,8 +7,8 @@ var config ={
     database:'omkarsuvarna2016',
     host: 'db.imad.hasura-app.io',
     port:'5432',
-    password: process.env.DB_PASSWORD,
-}
+    password: process.env.DB_PASSWORD
+};
 
 var app = express();
 app.use(morgan('combined'));
@@ -19,28 +19,16 @@ app.get('/', function (req, res) {
 var pool = new Pool(config);
 app.get('/test-db', function (req,res){
     pool.query('SELECT * FROM test', function(err,result)
-        if (err){
+        if(err){
             re.status(500).send(err.toString());
         }
         else{
             re.send(JSON.stringfy(result));
         }
-        
      )
-    
 });
 
-app.get('/article-one', function (req, res) {
-  res.send('Article one will be served here'));
-});
 
-app.get('/article-two', function (req, res) {
-  res.send('Article two will be served here'));
-});
-
-app.get('/article-three', function (req, res) {
-  res.send('Article three will be served here'));
-});
 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
