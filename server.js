@@ -17,13 +17,13 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 var pool = new Pool(config);
-app.get('/test-db', function (req,res){
+app.get('/test-db', function (req,res) {
     pool.query('SELECT * FROM test', function(err,result)
-        if(err){
-            re.status(500).send(err.toString());
+        if (err){
+            res.status(500).send(err.toString());
         }
         else{
-            re.send(JSON.stringfy(result));
+            res.send(JSON.stringfy(result));
         }
      )
 });
